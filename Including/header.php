@@ -56,10 +56,26 @@
 
                         <ul class="dropdown-list" data-drop-down>
                             <li>
+                                <?php
+                                $id = $_SESSION['email'];
+                                $sql = "SELECT * FROM users WHERE email='$id'";
+                                $data = mysqli_query($conn, $sql);
+
+                                if ($row = mysqli_fetch_assoc($data)) {
+                                    $photo = !empty($row['photo']) ? $row['photo'] : 'default.png';
+                                } else {
+                                    $photo = 'default.png';
+                                }
+                                ?>
+
                                 <a href="../User/profile.php" class="dropdown-link label-medium">
-                                    <span class="material-symbols-rounded dropdownicon">account_circle</span>
+                                    <span class="dropdownicon">
+                                        <img src="../uploadphoto/users/<?php echo $photo; ?>" alt="logo" style="height: 30px; width: 30px; border-radius: 50%; display: inline;" >
+                                    </span>
                                     My profile
                                 </a>
+                            </li>
+
                             </li>
                             <li>
                                 <a href="../User/booking.php" class="dropdown-link label-medium">

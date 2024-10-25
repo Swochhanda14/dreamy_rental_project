@@ -91,14 +91,14 @@
                         <li>
                             <a href="#">
                                 <span class="material-symbols-rounded">location_on</span>
-                                <span class="text">State & City</span>
+                                <span class="text">Location</span>
                                 <i class="fa-solid fa-caret-down arrow"></i>
                             </a>
                             <ul class="sub-menu">
                                 <li>
                                     <a href="addlocation.php">
                                         <span class="material-symbols-rounded">add_circle</span>
-                                        <span class="text">Add State & City</span>
+                                        <span class="text">Add location</span>
                                     </a>
                                 </li>
 
@@ -147,7 +147,7 @@
                                 <li>
                                     <a href="viewaboutcontent.php">
                                         <span class="material-symbols-rounded">pages</span>
-                                        <span class="text">View About Content</span>
+                                        <span class="text">View Content</span>
                                     </a>
                                 </li>
 
