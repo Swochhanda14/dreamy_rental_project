@@ -95,17 +95,17 @@ $user_email = $_SESSION['email'];
                                 $data = mysqli_query($conn, $sql);
                                 $total = mysqli_num_rows($data);
                                 if ($total > 0) {
-
+                                    $counter = 1;
                                     while ($row = mysqli_fetch_assoc($data)) {
                                         echo "<tr>
-                                        <td>" . $row['id'] . "</td>
+                                        <td>" . $counter++ . "</td>
                                         <td>" . $row['pname'] . "</td>
                                         <td>" . $row['paddress'] . "</td>
                                         <td>Rs " . $row['pprice'] . " /-</td>
                                         <td>Rs " . $row['depositeamt'] . " /-</td>
                                         <td>" . $row['bookingdate'] . "</td>
                                         <td class='actionbtn'>
-                                            <a href='viewproperty.php?id=$row[id]' class='btn btn-primary'>View Details</a>
+                                            <a href='viewproperty.php?id=$row[id]' class='btn btn-primary'>View</a>
                                             <a href='cancelbooking.php?id=$row[id]' class='btn btn-danger'>Cancel</a>
                                         </td>
                                         </tr>";
