@@ -1,6 +1,6 @@
 <?php
-    require('../Including/db_connection.php');
-    session_start();
+require('../Including/db_connection.php');
+session_start();
 ?>
 
 
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['reset'])) {
         $_SESSION['status'] = "Invalid Email!";
         $_SESSION['status_code'] = "error";
         echo "<meta http-equiv='refresh' content='0; url=http://localhost/dreamyrental/User/index.php'> ";
-        exit();  
+        exit();
     }
 
     // Check if passwords match
@@ -23,29 +23,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['reset'])) {
         $_SESSION['status'] = "Passwords do not match!";
         $_SESSION['status_code'] = "error";
         echo "<meta http-equiv='refresh' content='0; url=http://localhost/dreamyrental/User/index.php'> ";
-        exit();  
+        exit();
     }
 
-    if (!empty($email) && !empty($newpassword) && !empty($cpassword)) { 
-        $sql = "UPDATE users SET  email='$email', password='$newpassword' WHERE email='$email'";
-        $data = mysqli_query($conn, $sql);
-
-        if ($data) {
-            $_SESSION['status'] = "Password updated successfully!";
-            $_SESSION['status_code'] = "success";
-            echo "<meta http-equiv='refresh' content='0; url=http://localhost/dreamyrental/User/index.php'> ";
-            exit(); 
-        } else {
-            $_SESSION['status'] = "Failed to update password!";
-            $_SESSION['status_code'] = "error";
-            echo "<meta http-equiv='refresh' content='0; url=http://localhost/dreamyrental/User/index.php'> ";
-            exit();  
-        }
-    } else {
-        $_SESSION['status'] = "Please fill all fields!";
+    // Check if email exists
+    $sql = "SELECT * FROM users WHERE email = '$email'";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) == 0) {
+        $_SESSION['status'] = "Email does not exist!";
         $_SESSION['status_code'] = "error";
         echo "<meta http-equiv='refresh' content='0; url=http://localhost/dreamyrental/User/index.php'> ";
-        exit();  
     }
+
+    
+
+    $sql = "UPDATE users SET password='$newpassword' WHERE email='$email'";
+    $data = mysqli_query($conn, $sql);
+
+    if ($data) {
+        $_SESSION['status'] = "Password updated successfully!";
+        $_SESSION['status_code'] = "success";
+        echo "<meta http-equiv='refresh' content='0; url=http://localhost/dreamyrental/User/index.php'> ";
+        exit();
+    } else {
+        $_SESSION['status'] = "Failed to update password!";
+        $_SESSION['status_code'] = "error";
+        echo "<meta http-equiv='refresh' content='0; url=http://localhost/dreamyrental/User/index.php'> ";
+        exit();
+    }
+} else {
+    $_SESSION['status'] = "Please fill all fields!";
+    $_SESSION['status_code'] = "error";
+    echo "<meta http-equiv='refresh' content='0; url=http://localhost/dreamyrental/User/index.php'> ";
+    exit();
 }
 ?>
